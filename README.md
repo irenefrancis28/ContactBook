@@ -1,49 +1,37 @@
 Contact Book API
 
-A backend REST API built using FastAPI and PostgreSQL.
+This is a backend project built using FastAPI and PostgreSQL.
+The API allows users to manage contacts, create groups, and maintain a list of favorite contacts.
 
-Features
+What I implemented
 
 Create, view, update, and delete contacts
-
-Manage contact groups
-
+Create and manage groups
 Add and remove favorite contacts
+PostgreSQL database integration for selected endpoints
+Request validation using Pydantic
 
-Store data in PostgreSQL
-
-Validate requests using Pydantic
-
-Test APIs using Swagger/OpenAPI
-
-Technologies Used
+Tech Stack
 
 Python
-
 FastAPI
-
 PostgreSQL
-
 SQLAlchemy
-
 Pydantic
 
-How to Run
+Run the project
 
 pip install -r requirements.txt
-
 uvicorn contact_book.main:app --reload
 
 API Documentation
 
 After starting the server, open:
-
 http://127.0.0.1:8000/docs
 
 Current Status
 
-PostgreSQL integration has been implemented for selected endpoints. Remaining endpoints are being migrated from in-memory storage to database-backed operations as part of ongoing backend development practice.
-
+The project is still in progress. Some endpoints are already connected to PostgreSQL, and I’m currently working on the remaining endpoints and the favorites feature.
 Author
 
 Irene Francis
