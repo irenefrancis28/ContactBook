@@ -36,20 +36,25 @@ def add(contact: Contact, db: Session = Depends(get_db)):
       
 
 @router.delete('/contact/{name}')
-def remove(name):
-    for i in contacts:
-         if i['name']==name:
-              contacts.remove(i)
-              return 'the contact was removed'
-    return 'contact not found'
+def remove(name: str,db: Session = Depends(get_db)):
+    contact=db.query(database_models.Contact).filter(database_models.Contact.name == name).first()
+    if not contact:
+        return {"message": "not found"}
+    db.delete(contact)
+    db.commit()
+    return f"Contact {name} was deleted."
+    
 
 @router.put('/contact')
-def update(contact: Contact):
-     for i in contacts:
-               if i['name'] == contact.name:
-                    for x in contacts:
-                        if x['mobileNo']==contact.mobileNo:
-                            return 'Number already exists. Try again'
-                    i['mobileNo']=contact.mobileNo
-                    return 'contact was successfully updated'
-     return 'contact not found'
+def update(contact: Contact,db: Session = Depends(get_db)):
+     existing_name=db.query(database_models.Contact).filter(database_models.Contact.name == contact.name).first()
+     if existing_name:
+           existing_no= db.query(database_models.Contact).filter(database_models.Contact.mobileNo==contact.mobileNo).first()
+           if existing_no:
+                return f"The number {contact.mobileNo} is already assigned. Check your number"
+           existing_name.mobileNo= contact.mobileNo
+           db.commit()
+           return f"Contact {contact.name} was successfully updated"
+     return f"Name not found.Try again"
+          
+    
