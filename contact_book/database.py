@@ -40,4 +40,17 @@ def init_db():
     finally:
         db.close()
 
+def group_init_db():
+    db = SessionLocal()
+    try:
+        count = db.query(database_models.Group).count()
+
+        if count == 0:
+            for group in groups:
+                db.add(database_models.Group(**group))
+
+            db.commit()
+
+    finally:
+        db.close()
 

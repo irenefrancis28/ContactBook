@@ -6,6 +6,7 @@ from contact_book.routers.groups import router as group_router
 from contact_book.database import engine
 import contact_book.database_models as database_models
 from contact_book.database import init_db
+from contact_book.database import group_init_db
 
 app = FastAPI()
 
@@ -17,6 +18,7 @@ database_models.Base.metadata.create_all(bind=engine)
 @app.on_event("startup")
 def startup():
    init_db()
+   group_init_db()
 
 
 

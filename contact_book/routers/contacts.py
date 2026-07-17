@@ -1,6 +1,5 @@
 from fastapi import Depends, APIRouter
 from contact_book.models import Contact
-from contact_book.database import contacts
 from sqlalchemy.orm import Session
 from contact_book.database import get_db
 import contact_book.database_models as database_models
